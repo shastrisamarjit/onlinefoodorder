@@ -1,0 +1,43 @@
+
+{% extends 'pwn/welcome.html' %}
+
+{% block admin_welcome %}
+
+
+    <form action="{% url 'save_state' %}"method="post">
+     {% csrf_token %}
+      <table align="center"border="2">
+          <tr align="center">
+              <th colspan="2">State Page</th>
+          </tr>
+          {{ form }}
+          <tr align="center">
+              <th colspan="2"><button type="button" class="btn btn-outline-success">Save</button></th>
+          </tr>
+          <tr>
+              <th colspan="2">
+                  <table>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Photo</th>
+                          <th>Update</th>
+                          <th>Delete</th>
+                      </tr>
+                      {% for x in X %}
+                        <tr>
+                            <th>{{ x.id }}</th>
+                            <th>{{ x.name }}</th>
+                            <th>{{ x.photo }}</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                      {% endfor %}
+                  </table>
+              </th>
+          </tr>
+
+      </table>
+    </form>
+
+{% endblock %}
