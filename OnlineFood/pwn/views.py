@@ -36,9 +36,17 @@ def save_state(request):
     if sf.is_valid():
         sf.save()
         messages.success(request, "Registered Successfully")
-        return render(request, "pwn/openstate.html", {"form": sf, "X": state_data})
+        return render(request, "pwn/openstate.html", {"form":Stateform, "X": state_data})
     else:
-        return render(request, "pwn/openstate.html", {"form": sf, "X": state_data})
+        return render(request, "pwn/openstate.html", {"form":Stateform, "X": state_data})
+
+def deletestate(request):
+    x=request.GET.get("no")
+    StateModel.objects.filter(name=x).delete()
+    y=StateModel.objects.all()
+    return render(request,"pwn/openstate.html",{"data":y,"form":Stateform})
+#def updateschedule(request):
+#    x=request.GET.get("no")
 
 def openCity(request):
     return render(request,"pwn/opencity.html")

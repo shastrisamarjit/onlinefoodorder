@@ -1,22 +1,39 @@
 
 {% extends 'pwn/welcome.html' %}
-
+{% load static %}
 {% block admin_welcome %}
+     <script>
+            function show()
+            {
+                var name = document.getElementById("t1").value;
+                document.getElementById("s1").innerText = name;
+            }
+        </script>
+
 
 
     <form action="{% url 'save_state' %}"method="post">
      {% csrf_token %}
-      <table align="center"border="2">
+      <table align="center"border="0">
           <tr align="center">
               <th colspan="2">State Page</th>
           </tr>
           {{ form }}
           <tr align="center">
-              <th colspan="2"><button type="button" class="btn btn-outline-success">Save</button></th>
+              <th colspan="2"><button type="submit" class="btn btn-outline-success">Save</button></th>
           </tr>
           <tr>
               <th colspan="2">
-                  <table>
+                  {% if x in messages %}
+                      {{ x }}
+                  {% endif %}
+
+              </th>
+          </tr>
+
+      </table>
+    </form>
+    <table align="right"border="2">
                       <tr>
                           <th>ID</th>
                           <th>Name</th>
@@ -29,15 +46,14 @@
                             <th>{{ x.id }}</th>
                             <th>{{ x.name }}</th>
                             <th>{{ x.photo }}</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th><img src="{% static 'images/update.png' %}"width="25"></th>
+                            <th><a href="{% url 'deletestate' %}?no={{ x.name }}">
+                                  <img src="{% static 'images/delete.png' %}"width="25"id="t1" onkeyup="show()">
+                                </a>
+                                <span id="s1"></span>
+                            </th>
                         </tr>
                       {% endfor %}
                   </table>
-              </th>
-          </tr>
-
-      </table>
-    </form>
 
 {% endblock %}
