@@ -11,6 +11,7 @@ urlpatterns = [
     path('state/',views.openState,name='state'),
     path('save_state/',views.save_state,name="save_state"),
     path('deletestate/',views.deletestate,name="deletestate"),
+    path('updatestate/',views.updatestate,name="updatestate"),
     path('city/',views.openCity,name='city'),
     path('cuisine/',views.openCusine,name='cuisine'),
     path('vendor/',views.openVendor,name='vendor'),

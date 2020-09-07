@@ -6,7 +6,7 @@
             function show()
             {
                 var name = document.getElementById("t1").value;
-                document.getElementById("s1").innerText = name;
+                document.getElementById("s1").innerHTML = ;
             }
         </script>
 
@@ -30,6 +30,23 @@
 
               </th>
           </tr>
+          <tr>
+              <th>
+                  <table align="center" border="2">
+                    <tr>
+                        <th>
+                            <input type="hidden"placeholder="username"value="{{ update.name }}"name="u1"required>
+                        </th>
+                        <th>
+                            <input type="hidden"placeholder="username"value="{{ update.photo }}"name="u2"required>
+                        </th>
+                        <th>
+                            <button type="submit" class="btn btn-outline-success">Save</button>
+                        </th>
+                    </tr>
+                  </table>
+              </th>
+          </tr>
 
       </table>
     </form>
@@ -46,7 +63,10 @@
                             <th>{{ x.id }}</th>
                             <th>{{ x.name }}</th>
                             <th>{{ x.photo }}</th>
-                            <th><img src="{% static 'images/update.png' %}"width="25"></th>
+                            <th><a href="{% url 'updatestate' %}?no={{ x.name }}">
+                                 <img src="{% static 'images/update.png' %}"width="25">
+                                </a>
+                            </th>
                             <th><a href="{% url 'deletestate' %}?no={{ x.name }}">
                                   <img src="{% static 'images/delete.png' %}"width="25"id="t1" onkeyup="show()">
                                 </a>

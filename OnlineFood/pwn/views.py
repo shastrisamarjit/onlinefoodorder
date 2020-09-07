@@ -37,6 +37,13 @@ def save_state(request):
         sf.save()
         messages.success(request, "Registered Successfully")
         return render(request, "pwn/openstate.html", {"form":Stateform, "X": state_data})
+    elif request.GET:
+        g=request.GET.get("name")
+        up1=request.POST.get("u1")
+        up2=request.POST.get("u2")
+        StateModel.objects.filter(name=g).update(name=up1,photo=up2)
+        messages.success(request, "Updated Successfully")
+        return render(request, "pwn/openstate.html", {})
     else:
         return render(request, "pwn/openstate.html", {"form":Stateform, "X": state_data})
 
@@ -44,9 +51,14 @@ def deletestate(request):
     x=request.GET.get("no")
     StateModel.objects.filter(name=x).delete()
     y=StateModel.objects.all()
-    return render(request,"pwn/openstate.html",{"data":y,"form":Stateform})
+    return render(request,"pwn/openstate.html",{"X":y,"form":Stateform})
 #def updateschedule(request):
 #    x=request.GET.get("no")
+def updatestate(request):
+    y = StateModel.objects.all()
+    x = request.GET.get("name")
+    data = StateModel.objects.get(name=x)
+    return render(request,"pwn/openstate.html",{"X":y,"form":Stateform,"update":data})
 
 def openCity(request):
     return render(request,"pwn/opencity.html")
